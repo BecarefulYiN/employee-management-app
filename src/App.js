@@ -3,6 +3,7 @@ import { GlobalContext } from "./context/GlobalContext";
 import { Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 import Login from "./pages/Login";
+import EmployeeTable from "./pages/EmployeeTable";
 
 function App() {
   const { Mode } = useContext(GlobalContext);
@@ -19,6 +20,7 @@ function App() {
         <CssBaseline />
         <Routes>
           <Route path='/' element={<Login />} />
+          <Route path='/employee' element={<EmployeeTable/>} />
         </Routes>
       </ThemeProvider>
     </>
