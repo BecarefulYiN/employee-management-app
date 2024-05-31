@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import { useContext } from "react";
 import Login from "./pages/Login";
 import EmployeeTable from "./pages/EmployeeTable";
+import Departments from "./pages/Departments";
 
 function App() {
   const { Mode } = useContext(GlobalContext);
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/employee' element={<EmployeeTable/>} />
+          <Route path='/department' element={<Departments/>} />
         </Routes>
       </ThemeProvider>
     </>
