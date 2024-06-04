@@ -1,4 +1,3 @@
-// EmployeeTable.js
 import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
@@ -6,8 +5,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '../components/AppBar';
 import LeftNavBar from '../components/LeftNavBar';
 import EmployeeTableList from '../components/Employee/EmployeeTableList';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 240;
 
@@ -19,7 +16,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: open ? `${drawerWidth}` : -230,
+    marginLeft: open ? `${drawerWidth}px` : -230,
   }),
 );
 
@@ -32,11 +29,9 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 function EmployeeTable() {
-  const [open, setOpen] = React.useState(false);
-  const [selectedItem, setSelectedItem] = useState('Manage Employee');
-  
+  const [open, setOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState('Manage Employee'); 
 
-  
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -48,7 +43,7 @@ function EmployeeTable() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <AppBar open={open} handleDrawerOpen={handleDrawerOpen} selectedItem={selectedItem} />
       <LeftNavBar
         open={open}
         handleDrawerClose={handleDrawerClose}
@@ -57,11 +52,9 @@ function EmployeeTable() {
       />
       <Main open={open}>
         <DrawerHeader />
-        <EmployeeTableList/>
+        <EmployeeTableList />
       </Main>
-      
     </Box>
-    
   );
 }
 

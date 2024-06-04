@@ -7,9 +7,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import Get_Employee from '../../api/Employee/GetEmployeeController';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import Get_Employee from '../../api/Employee/GetEmployeeController';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,52 +31,54 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 function EmployeeTableList() {
-  const [data, setdata] = useState([]);
-  const [showLoading, setshowLoading] = useState(false);
+  const [data, setData] = useState([]);
+  const [showLoading, setShowLoading] = useState(true); // Initially set to true
 
   useEffect(() => {
-    Get_Employee(setdata, setshowLoading);
+    Get_Employee(setData, setShowLoading);
   }, []);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 700 }} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell>EmployeeId</StyledTableCell>
-            <StyledTableCell align="right">First Name</StyledTableCell>
-            <StyledTableCell align="right">Last Name</StyledTableCell>
-            <StyledTableCell align="right">Email</StyledTableCell>
-            <StyledTableCell align="right">PhoneNumber</StyledTableCell>
-            <StyledTableCell align="right">Hire Date</StyledTableCell>
-            <StyledTableCell align="right">Department</StyledTableCell>
-            <StyledTableCell align="right">Role</StyledTableCell>
-            <StyledTableCell align="right">IsActive</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <StyledTableRow key={row.EmployeeId}>
-              <StyledTableCell align="right">{row.EmployeeId}</StyledTableCell>
-              <StyledTableCell align="right">{row.FirstName}</StyledTableCell>
-              <StyledTableCell align="right">{row.LastName}</StyledTableCell>
-              <StyledTableCell align="right">{row.Email}</StyledTableCell>
-              <StyledTableCell align="right">{row.PhoneNumber}</StyledTableCell>
-              <StyledTableCell align="right">{row.HireDate}</StyledTableCell>
-              <StyledTableCell align="right">{row.DepartmentName}</StyledTableCell>
-              <StyledTableCell align="right">{row.RoleName}</StyledTableCell>
-              <StyledTableCell align="right">{row.IsActive}</StyledTableCell>
-            </StyledTableRow>
-          ))}
-        </TableBody>
-      </Table>
+    <>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 700 }} aria-label="customized table">
+          <TableHead>
+            <TableRow>
+              <StyledTableCell align="center">EmployeeId</StyledTableCell>
+              <StyledTableCell align="center">First Name</StyledTableCell>
+              <StyledTableCell align="center">Last Name</StyledTableCell>
+              <StyledTableCell align="center">Email</StyledTableCell>
+              <StyledTableCell align="center">Phone Number</StyledTableCell>
+              <StyledTableCell align="center">Hire Date</StyledTableCell>
+              <StyledTableCell align="center">Department</StyledTableCell>
+              <StyledTableCell align="center">Role</StyledTableCell>
+              <StyledTableCell align="center">Is Active</StyledTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <StyledTableRow key={row.EmployeeId}>
+                <StyledTableCell align="center">{row.EmployeeId}</StyledTableCell>
+                <StyledTableCell align="center">{row.FirstName}</StyledTableCell>
+                <StyledTableCell align="center">{row.LastName}</StyledTableCell>
+                <StyledTableCell align="center">{row.Email}</StyledTableCell>
+                <StyledTableCell align="center">{row.PhoneNumber}</StyledTableCell>
+                <StyledTableCell align="center">{row.HireDate}</StyledTableCell>
+                <StyledTableCell align="center">{row.DepartmentName}</StyledTableCell>
+                <StyledTableCell align="center">{row.RoleName}</StyledTableCell>
+                <StyledTableCell align="center">{row.IsActive ? 'Yes' : 'No'}</StyledTableCell>
+              </StyledTableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={showLoading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </TableContainer>
+    </>
   );
 }
 

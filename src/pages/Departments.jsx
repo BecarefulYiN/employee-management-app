@@ -44,7 +44,7 @@ function Departments() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar open={open} handleDrawerOpen={handleDrawerOpen} />
+      <AppBar open={open} handleDrawerOpen={handleDrawerOpen} selectedItem={selectedItem}/>
       <LeftNavBar
         open={open}
         handleDrawerClose={handleDrawerClose}

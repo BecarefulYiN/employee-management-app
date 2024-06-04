@@ -1,4 +1,3 @@
-// AppBar.js
 import React from 'react';
 import { styled } from '@mui/material/styles';
 import MuiAppBar from '@mui/material/AppBar';
@@ -26,7 +25,7 @@ const StyledAppBar = styled(MuiAppBar, {
   }),
 }));
 
-function AppBar({ open, handleDrawerOpen }) {
+function AppBar({ open, handleDrawerOpen, selectedItem }) {
   return (
     <StyledAppBar position="fixed" open={open}>
       <Toolbar>
@@ -40,7 +39,7 @@ function AppBar({ open, handleDrawerOpen }) {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" noWrap component="div">
-          Employee Management System
+          {selectedItem}
         </Typography>
       </Toolbar>
     </StyledAppBar>

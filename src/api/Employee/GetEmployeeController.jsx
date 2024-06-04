@@ -5,9 +5,10 @@ const Get_Employee = async (setdata, setshowLoading) => {
   try {
     const res = await axios.get("https://localhost:7130/api/employee");
     if (res.status === 200) {
-      res.data.forEach(({ EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive }) => {
-        setdata(item => [...item, { EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive }]);
-      });
+      const employeeData = res.data.map(({ EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive }) => ({
+        EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive
+      }));
+      setdata(employeeData);
     }
     setshowLoading(false);
   } catch (err) {
