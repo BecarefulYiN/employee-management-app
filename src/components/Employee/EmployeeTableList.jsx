@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,7 +8,8 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Get_Employee from '../../api/Employee/GetEmployeeController';
-import { useState,useEffect } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -24,61 +25,59 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  // hide last border
   '&:last-child td, &:last-child th': {
     border: 0,
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 function EmployeeTableList() {
-
-  
   const [data, setdata] = useState([]);
+  const [showLoading, setshowLoading] = useState(false);
+
   useEffect(() => {
-    
-    Get_Employee(setdata);
-  }, [])
-  
+    Get_Employee(setdata, setshowLoading);
+  }, []);
+
   return (
     <TableContainer component={Paper}>
-    <Table sx={{ minWidth: 700 }} aria-label="customized table">
-      <TableHead>
-        <TableRow>
-          <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-          <StyledTableCell align="right">Calories</StyledTableCell>
-          <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-          <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-          <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {rows.map((row) => (
-          <StyledTableRow key={row.name}>
-            <StyledTableCell component="th" scope="row">
-              {row.name}
-            </StyledTableCell>
-            <StyledTableCell align="right">{row.calories}</StyledTableCell>
-            <StyledTableCell align="right">{row.fat}</StyledTableCell>
-            <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-            <StyledTableCell align="right">{row.protein}</StyledTableCell>
-          </StyledTableRow>
-        ))}
-      </TableBody>
-    </Table>
-  </TableContainer>
-);
+      <Table sx={{ minWidth: 700 }} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>EmployeeId</StyledTableCell>
+            <StyledTableCell align="right">First Name</StyledTableCell>
+            <StyledTableCell align="right">Last Name</StyledTableCell>
+            <StyledTableCell align="right">Email</StyledTableCell>
+            <StyledTableCell align="right">PhoneNumber</StyledTableCell>
+            <StyledTableCell align="right">Hire Date</StyledTableCell>
+            <StyledTableCell align="right">Department</StyledTableCell>
+            <StyledTableCell align="right">Role</StyledTableCell>
+            <StyledTableCell align="right">IsActive</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {data.map((row) => (
+            <StyledTableRow key={row.EmployeeId}>
+              <StyledTableCell align="right">{row.EmployeeId}</StyledTableCell>
+              <StyledTableCell align="right">{row.FirstName}</StyledTableCell>
+              <StyledTableCell align="right">{row.LastName}</StyledTableCell>
+              <StyledTableCell align="right">{row.Email}</StyledTableCell>
+              <StyledTableCell align="right">{row.PhoneNumber}</StyledTableCell>
+              <StyledTableCell align="right">{row.HireDate}</StyledTableCell>
+              <StyledTableCell align="right">{row.DepartmentName}</StyledTableCell>
+              <StyledTableCell align="right">{row.RoleName}</StyledTableCell>
+              <StyledTableCell align="right">{row.IsActive}</StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={showLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    </TableContainer>
+  );
 }
 
-export default EmployeeTableList
+export default EmployeeTableList;

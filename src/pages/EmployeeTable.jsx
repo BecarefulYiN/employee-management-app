@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '../components/AppBar';
 import LeftNavBar from '../components/LeftNavBar';
 import EmployeeTableList from '../components/Employee/EmployeeTableList';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const drawerWidth = 240;
 
@@ -32,6 +34,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 function EmployeeTable() {
   const [open, setOpen] = React.useState(false);
   const [selectedItem, setSelectedItem] = useState('Manage Employee');
+  
 
   
   const handleDrawerOpen = () => {
@@ -56,7 +59,9 @@ function EmployeeTable() {
         <DrawerHeader />
         <EmployeeTableList/>
       </Main>
+      
     </Box>
+    
   );
 }
 
