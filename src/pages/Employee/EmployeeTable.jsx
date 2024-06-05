@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '../components/AppBar';
-import LeftNavBar from '../components/LeftNavBar';
-import EmployeeTableList from '../components/Employee/EmployeeTableList';
+import AppBar from '../../components/AppBar';
+import LeftNavBar from '../../components/LeftNavBar';
+import EmployeeTableList from '../../components/Employee/EmployeeTableList';
+
 
 const drawerWidth = 240;
 
@@ -16,7 +17,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: open ? `${drawerWidth}px` : -230,
+    marginLeft: open ? `${drawerWidth}px` : -240,
   }),
 );
 
@@ -42,6 +43,7 @@ function EmployeeTable() {
 
   return (
     <Box sx={{ display: 'flex' }}>
+      
       <CssBaseline />
       <AppBar open={open} handleDrawerOpen={handleDrawerOpen} selectedItem={selectedItem} />
       <LeftNavBar
@@ -50,6 +52,7 @@ function EmployeeTable() {
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
       />
+      
       <Main open={open}>
         <DrawerHeader />
         <EmployeeTableList />

@@ -1,9 +1,10 @@
 import axios from "axios";
+import API_ENDPOINT from './../URL';
 
 const Get_Employee = async (setdata, setshowLoading) => {
   setshowLoading(true);
   try {
-    const res = await axios.get("https://localhost:7130/api/employee");
+    const res = await axios.get(`${API_ENDPOINT.URL}/employee`);
     if (res.status === 200) {
       const employeeData = res.data.map(({ EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive }) => ({
         EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive

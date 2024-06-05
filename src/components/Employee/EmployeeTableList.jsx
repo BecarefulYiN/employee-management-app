@@ -9,6 +9,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 import Get_Employee from '../../api/Employee/GetEmployeeController';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -33,13 +36,23 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 function EmployeeTableList() {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true); // Initially set to true
+  const navigate = useNavigate();
 
   useEffect(() => {
     Get_Employee(setData, setShowLoading);
   }, []);
 
+  const handleCreateButtonClick = () => {
+    navigate('/employee/create-employee-page');
+  };
+
   return (
     <>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 2 }}>
+        <Button variant="contained" color="primary" onClick={handleCreateButtonClick}>
+          Create
+        </Button>
+      </Box>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 700 }} aria-label="customized table">
           <TableHead>
