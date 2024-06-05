@@ -17,7 +17,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    marginLeft: open ? `${drawerWidth}px` : -240,
+    marginLeft: open ? 0 : -230,
   }),
 );
 

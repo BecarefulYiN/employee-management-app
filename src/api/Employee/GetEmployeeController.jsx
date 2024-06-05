@@ -2,9 +2,10 @@ import axios from "axios";
 import API_ENDPOINT from './../URL';
 
 const Get_Employee = async (setdata, setshowLoading) => {
-  setshowLoading(true);
+  
   try {
-    const res = await axios.get(`${API_ENDPOINT.URL}/employee`);
+    const res = await axios
+    .get(`${API_ENDPOINT.URL}/employee`);
     if (res.status === 200) {
       const employeeData = res.data.map(({ EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive }) => ({
         EmployeeId, FirstName, LastName, Email, PhoneNumber, HireDate, DepartmentName, RoleName, IsActive
@@ -13,6 +14,7 @@ const Get_Employee = async (setdata, setshowLoading) => {
     }
     setshowLoading(false);
   } catch (err) {
+    setshowLoading(true);
     console.error("Error fetching data:", err);
     if (err.response) {
       console.error("Response error:", err.response.status, err.response.data);
@@ -21,7 +23,6 @@ const Get_Employee = async (setdata, setshowLoading) => {
     } else {
       console.error("Error:", err.message);
     }
-    setshowLoading(false);
   }
 };
 
