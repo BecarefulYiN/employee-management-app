@@ -8,6 +8,7 @@ import EmployeeTable from "./pages/Employee/EmployeeTable";
 import CreateEmployeePage from "./components/Employee/CreateEmployeePage";
 import CreateDepartmentPage from "./components/Departments/CreateDepartmentPage";
 import Attendance from "./pages/Attendance/Attendance";
+import Project from "./pages/Project/Project";
 
 function App() {
   const { Mode } = useContext(GlobalContext);
@@ -29,6 +30,7 @@ function App() {
           <Route path='/employee/create-employee-page' element={<CreateEmployeePage/>} />
           <Route path='/employee/create-department-page' element={<CreateDepartmentPage/>}/>
           <Route path='/attendance' element={<Attendance/>}/>
+          <Route path='/project' element={<Project/>}/>
         </Routes>
       </ThemeProvider>
     </>
