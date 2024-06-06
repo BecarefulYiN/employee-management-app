@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SwitchModeButton from './../components/SwitchModeButton';
+import Check_Login from './../api/Employee/LogInController';
 
 const LoginInput = styled(TextField)({
   width: '20vw'
@@ -12,6 +13,21 @@ const LoginInput = styled(TextField)({
 
 function Login() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+
+  const isFormValid = () => {
+    return email !== '';
+  };
+
+  const btnCreate = () => {
+    const postBody = { Email: email };
+    Check_Login(postBody, navigate);
+    
+  };
 
   const handleSignUp = () => {
     navigate(`/SignUp`);
@@ -20,8 +36,6 @@ function Login() {
   return (
     <Box sx={{ width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
       <SwitchModeButton style={{ position: 'absolute', top: '20px', right: '20px' }} />
-
-      <Typography variant=''></Typography>
 
       <Box sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
         <Typography variant="h3" sx={{ display: 'block' }}>Welcome back</Typography>
@@ -42,10 +56,11 @@ function Login() {
       }}>
         <Typography variant='h3' sx={{ textDecoration: 'underline' }}>Login</Typography>
 
-        <LoginInput id="Username" label="Enter Your username" />
-        <LoginInput id="password" label="Enter Your password" />
+        <LoginInput id="email" label="Enter Your Email" value={email} onChange={handleEmailChange} />
 
-        <Button variant='contained' color="primary">Login</Button>
+        <Button variant='contained' color="primary" onClick={btnCreate} disabled={!isFormValid()}>
+          Login
+        </Button>
 
         <Typography variant='p'>forgot password?</Typography>
         <Typography variant='p'>Don't have an account? 
