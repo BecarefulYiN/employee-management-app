@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { Box, styled } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import SwitchModeButton from './../components/SwitchModeButton';
-import Check_Login from './../api/Employee/LogInController';
+import Check_Login from '../api/Login/LogInController';
 
 const LoginInput = styled(TextField)({
   width: '20vw'

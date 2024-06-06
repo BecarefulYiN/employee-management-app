@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
-import AppBar from '../components/AppBar';
-import LeftNavBar from '../components/LeftNavBar';
-import EmployeeTableList from '../components/Employee/EmployeeTableList';
+import AppBar from '../../components/AppBar';
+import LeftNavBar from '../../components/LeftNavBar';
+import DepartmentTable from '../../components/Departments/DepartmentTable';
 
 const drawerWidth = 240;
 
@@ -53,7 +53,7 @@ function Departments() {
       />
       <Main open={open}>
         <DrawerHeader />
-        <EmployeeTableList/>
+        <DepartmentTable/>
       </Main>
     </Box>
   );

@@ -1,5 +1,5 @@
 import axios from "axios";
-import API_ENDPOINT from './../URL';
+import API_ENDPOINT from '../URL';
 
 const Check_Login = async (postBody, navigate) => {
   try {

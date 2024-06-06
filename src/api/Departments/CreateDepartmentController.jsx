@@ -1,10 +1,10 @@
 import axios from "axios";
 import API_ENDPOINT from './../URL';
 
-const Create_Employee = async (postBody, setShowLoading, navigate) => {
+const Create_Department = async (postBody, setShowLoading, navigate) => {
   try {
-    setShowLoading(true); // Show loading indicator
-    const res = await axios.post(API_ENDPOINT.URL + "/create-employee", postBody);
+    setShowLoading(true); 
+    const res = await axios.post(API_ENDPOINT.URL + "/create-department", postBody);
     if (res.status === 201) {
       console.log(res.data);
       setShowLoading(false); // Hide loading indicator
@@ -16,4 +16,4 @@ const Create_Employee = async (postBody, setShowLoading, navigate) => {
   }
 }
 
-export default Create_Employee;
+export default Create_Department;
