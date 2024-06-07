@@ -35,7 +35,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 function EmployeeTableList() {
   const [data, setData] = useState([]);
-  const [showLoading, setShowLoading] = useState(true); // Initially set to true
+  const [showLoading, setShowLoading] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,11 +47,22 @@ function EmployeeTableList() {
     navigate('/employee/create-employee-page');
   };
 
+  const handleEditButtonClick = () => {
+    setIsEditing(!isEditing);
+  };
+
+  const handleEditButtonClickGotoEditPage = (id) => {
+    navigate(`/employee/edit-employee-page?id=${id}`);
+  };
+
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', mb: 2 }}>
         <Button variant="contained" color="primary" onClick={handleCreateButtonClick}>
           Create
+        </Button>
+        <Button variant="contained" color="secondary" onClick={handleEditButtonClick} sx={{ ml: 2 }}>
+          {isEditing ? 'Edit Complete' : 'Edit'}
         </Button>
       </Box>
       <TableContainer component={Paper}>
@@ -66,6 +78,7 @@ function EmployeeTableList() {
               <StyledTableCell align="center">Department</StyledTableCell>
               <StyledTableCell align="center">Role</StyledTableCell>
               <StyledTableCell align="center">Is Active</StyledTableCell>
+              {isEditing && <StyledTableCell align="center">Actions</StyledTableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -80,6 +93,17 @@ function EmployeeTableList() {
                 <StyledTableCell align="center">{row.DepartmentName}</StyledTableCell>
                 <StyledTableCell align="center">{row.RoleName}</StyledTableCell>
                 <StyledTableCell align="center">{row.IsActive ? 'Yes' : 'No'}</StyledTableCell>
+                {isEditing && (
+                  <StyledTableCell align="center">
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={() => handleEditButtonClickGotoEditPage(row.EmployeeId)}
+                    >
+                      Edit
+                    </Button>
+                  </StyledTableCell>
+                )}
               </StyledTableRow>
             ))}
           </TableBody>

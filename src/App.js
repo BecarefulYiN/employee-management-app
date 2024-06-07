@@ -9,6 +9,7 @@ import CreateEmployeePage from "./components/Employee/CreateEmployeePage";
 import CreateDepartmentPage from "./components/Departments/CreateDepartmentPage";
 import Attendance from "./pages/Attendance/Attendance";
 import Project from "./pages/Project/Project";
+import EditEmployeePage from "./components/Employee/EditEmployeePage";
 
 function App() {
   const { Mode } = useContext(GlobalContext);
@@ -31,6 +32,7 @@ function App() {
           <Route path='/employee/create-department-page' element={<CreateDepartmentPage/>}/>
           <Route path='/attendance' element={<Attendance/>}/>
           <Route path='/project' element={<Project/>}/>
+          <Route path='/employee/edit-employee-page' element={<EditEmployeePage/>}/>
         </Routes>
       </ThemeProvider>
     </>
