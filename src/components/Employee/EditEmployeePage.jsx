@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, CssBaseline, TextField, Button, MenuItem, Typography, Paper, Backdrop, CircularProgress } from '@mui/material';
 import AppBar from './../AppBar';
 import { useNavigate } from 'react-router-dom';
+import Update_Employee from './../../api/Employee/UpdateEmplyeeController';
 import Edit_Employee from './../../api/Employee/EditEmployeeController';
 
 const departments = [
@@ -25,16 +26,32 @@ function EditEmployeePage() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [department, setDepartment] = useState('');
   const [role, setRole] = useState('');
-  const [employeeId, setEmployeeId] = useState( );
+  const [employeeId, setEmployeeId] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
-    var id = searchParams.get("id");
+    const id = searchParams.get('id');
     setEmployeeId(id);
     Edit_Employee(id, setFirstName, setLastName, setEmail, setPhoneNumber, setDepartment, setRole, setShowLoading);
   }, []);
+
+  const btnUpdate = async () => {
+    const confirmUpdate = window.confirm("Are you sure you want to update the employee details?");
+    if (confirmUpdate) {
+      const postBody = {
+        FirstName: firstName,
+        LastName: lastName,
+        PhoneNumber: phoneNumber,
+        Email: email,
+        DepartmentName: department,
+        RoleName: role,
+      };
+      await Update_Employee(postBody, setShowLoading, employeeId);
+      navigate('/employee');
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,8 +70,7 @@ function EditEmployeePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid()) {
-      // Add update employee logic here
-      navigate('/employee');
+      btnUpdate();
     } else {
       console.log('Please fill all fields');
     }

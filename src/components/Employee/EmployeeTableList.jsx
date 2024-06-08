@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import Get_Employee from '../../api/Employee/GetEmployeeController';
+import Delete_Employee from '../../api/Employee/DeleteEmployeeController'; // Import delete function
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -37,10 +38,15 @@ function EmployeeTableList() {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  const refreshData = () => {
     Get_Employee(setData, setShowLoading);
+  };
+
+  useEffect(() => {
+    refreshData();
   }, []);
 
   const handleCreateButtonClick = () => {
@@ -51,8 +57,19 @@ function EmployeeTableList() {
     setIsEditing(!isEditing);
   };
 
+  const handleDeleteButtonClick = () => {
+    setIsDeleting(!isDeleting);
+  };
+
   const handleEditButtonClickGotoEditPage = (id) => {
     navigate(`/employee/edit-employee-page?id=${id}`);
+  };
+
+  const handleDeleteEmployee = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this employee?");
+    if (confirmDelete) {
+      await Delete_Employee(id, setShowLoading, refreshData);
+    }
   };
 
   return (
@@ -63,6 +80,9 @@ function EmployeeTableList() {
         </Button>
         <Button variant="contained" color="secondary" onClick={handleEditButtonClick} sx={{ ml: 2 }}>
           {isEditing ? 'Edit Complete' : 'Edit'}
+        </Button>
+        <Button variant="contained" color="error" onClick={handleDeleteButtonClick} sx={{ ml: 2 }}>
+          {isDeleting ? 'Delete Complete' : 'Delete'}
         </Button>
       </Box>
       <TableContainer component={Paper}>
@@ -79,6 +99,7 @@ function EmployeeTableList() {
               <StyledTableCell align="center">Role</StyledTableCell>
               <StyledTableCell align="center">Is Active</StyledTableCell>
               {isEditing && <StyledTableCell align="center">Actions</StyledTableCell>}
+              {isDeleting && <StyledTableCell align="center">Actions</StyledTableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -99,8 +120,20 @@ function EmployeeTableList() {
                       variant="contained"
                       color="primary"
                       onClick={() => handleEditButtonClickGotoEditPage(row.EmployeeId)}
+                      sx={{ mr: 1 }}
                     >
                       Edit
+                    </Button>
+                  </StyledTableCell>
+                )}
+                {isDeleting && (
+                  <StyledTableCell align="center">
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => handleDeleteEmployee(row.EmployeeId)}
+                    >
+                      Delete
                     </Button>
                   </StyledTableCell>
                 )}
