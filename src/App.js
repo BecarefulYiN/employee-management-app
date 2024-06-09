@@ -10,6 +10,9 @@ import CreateDepartmentPage from "./components/Departments/CreateDepartmentPage"
 import Attendance from "./pages/Attendance/Attendance";
 import Project from "./pages/Project/Project";
 import EditEmployeePage from "./components/Employee/EditEmployeePage";
+import EditDepartmentPage from './components/Departments/EditDepartmentPage';
+import CreateProjectPage from "./components/Project/CreateProjectPage";
+import EditProjectPage from './components/Project/EditProjectPage';
 
 function App() {
   const { Mode } = useContext(GlobalContext);
@@ -33,6 +36,10 @@ function App() {
           <Route path='/attendance' element={<Attendance/>}/>
           <Route path='/project' element={<Project/>}/>
           <Route path='/employee/edit-employee-page' element={<EditEmployeePage/>}/>
+          <Route path='/department/create-department-page' element={<CreateDepartmentPage/>}/>
+          <Route path='/department/edit-department-page' element={<EditDepartmentPage/>}/>
+          <Route path='/project/create-project-page' element={<CreateProjectPage/>}/>
+          <Route path='/project/edit-project-page' element={<EditProjectPage/>}/>
         </Routes>
       </ThemeProvider>
     </>

@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { useNavigate } from 'react-router-dom';
 import Get_Employee from '../../api/Employee/GetEmployeeController';
-import Delete_Employee from '../../api/Employee/DeleteEmployeeController'; // Import delete function
+import Delete_Employee from '../../api/Employee/DeleteEmployeeController'; 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
