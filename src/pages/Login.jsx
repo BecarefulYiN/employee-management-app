@@ -61,11 +61,6 @@ function Login() {
         <Button variant='contained' color="primary" onClick={btnCreate} disabled={!isFormValid()}>
           Login
         </Button>
-
-        <Typography variant='p'>forgot password?</Typography>
-        <Typography variant='p'>Don't have an account? 
-          <a href='#' onClick={handleSignUp}>Sign up</a>
-        </Typography>
       </Box>
     </Box>
   );

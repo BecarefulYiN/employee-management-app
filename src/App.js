@@ -40,6 +40,7 @@ function App() {
           <Route path='/department/edit-department-page' element={<EditDepartmentPage/>}/>
           <Route path='/project/create-project-page' element={<CreateProjectPage/>}/>
           <Route path='/project/edit-project-page' element={<EditProjectPage/>}/>
+          
         </Routes>
       </ThemeProvider>
     </>
